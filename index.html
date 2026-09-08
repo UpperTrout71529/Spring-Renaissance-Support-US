@@ -4,20 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>Spring Renaissance | Curator Chat</title>
-    
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300&family=Montserrat:wght@200;300;400;500&display=swap" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 
     <style>
         :root {
-            --bg-color: #fcfaf7;
-            --text-color: #211f1c;
-            --accent-color: #bfa38a;
-            --muted-text: #8c857e;
+            /* Brought in line with the sr-*.liquid section tokens used on
+               the main site (ink / cream / bronze), instead of the looser
+               tan-and-off-white the widget had before. */
+            --bg-color: #fbfbf9;
+            --bg-desktop-surround: #f2ede6;
+            --text-color: #1a1918;
+            --accent-color: #9a7b52;
+            --muted-text: rgba(26, 25, 24, 0.55);
             --input-bg: #ffffff;
-            --input-border: #e8e5e0;
-            --button-bg: #211f1c;
-            --button-text: #ffffff;
+            --input-border: rgba(26, 25, 24, 0.12);
+            --button-bg: #1a1918;
+            --button-text: #fbfbf9;
             --card-bg: #ffffff;
+            --sr-serif: 'Cormorant Garamond', 'Times New Roman', Georgia, serif;
+            --sr-sans: 'Inter', 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
         }
 
         * {
@@ -39,10 +45,10 @@
         body {
             background-color: var(--bg-color);
             color: var(--text-color);
-            font-family: 'Montserrat', sans-serif;
+            font-family: var(--sr-sans);
             font-weight: 300;
             line-height: 1.6;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.3px;
             display: flex;
             flex-direction: column;
         }
@@ -81,34 +87,46 @@
             margin-bottom: 0;
         }
 
+        .sr-kicker {
+            font-family: var(--sr-sans);
+            font-weight: 500;
+            font-size: 10px;
+            letter-spacing: 0.26em;
+            text-transform: uppercase;
+            color: var(--accent-color);
+            text-align: center;
+            display: block;
+            margin-bottom: 6px;
+            flex-shrink: 0;
+        }
+
         .section-title {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.2rem;
+            font-family: var(--sr-serif);
+            font-size: 1.5rem;
             font-weight: 400;
             color: var(--text-color);
             margin-bottom: 20px;
-            letter-spacing: 2px;
-            text-transform: uppercase;
+            letter-spacing: 0.5px;
             text-align: center;
             flex-shrink: 0;
         }
-        
+
         .section-subtitle {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 0.55rem;
+            font-family: var(--sr-sans);
+            font-size: 0.7rem;
             font-weight: 300;
+            font-style: italic;
             color: var(--muted-text);
             display: block;
-            margin-top: 4px;
-            letter-spacing: 1px;
-            text-transform: uppercase;
+            margin-top: 6px;
+            letter-spacing: 0.3px;
         }
 
         .chat-space {
             display: flex;
             flex-direction: column;
             gap: 24px;
-            flex: 1; 
+            flex: 1;
             overflow-y: auto;
             padding: 10px 4px;
             margin-bottom: 16px;
@@ -146,7 +164,7 @@
         .msg-card {
             max-width: 85%;
             padding: 20px;
-            border-radius: 16px;
+            border-radius: 4px;
             font-size: 0.9rem;
             line-height: 1.6;
             word-wrap: break-word;
@@ -155,19 +173,20 @@
         .msg-wrapper.bot .msg-card {
             background: var(--card-bg);
             border: 1px solid var(--input-border);
-            border-left: 3px solid var(--accent-color);
+            border-left: 2px solid var(--accent-color);
             color: var(--text-color);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.01);
+            box-shadow: 0 4px 20px rgba(26, 25, 24, 0.02);
         }
 
         .msg-wrapper.user .msg-card {
             background: var(--button-bg);
             color: var(--button-text);
             font-weight: 300;
+            border-radius: 4px;
         }
 
         .curator-typing {
-            font-family: 'Cormorant Garamond', serif;
+            font-family: var(--sr-serif);
             font-style: italic;
             color: var(--muted-text);
             font-size: 1.1rem;
@@ -185,10 +204,10 @@
             align-items: center;
             background-color: var(--input-bg);
             border: 1px solid var(--input-border);
-            border-radius: 14px;
+            border-radius: 4px;
             padding-right: 6px;
             padding-left: 14px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.01);
+            box-shadow: 0 2px 10px rgba(26, 25, 24, 0.02);
             transition: all 0.4s ease;
             position: relative;
             flex-shrink: 0;
@@ -196,7 +215,7 @@
 
         .input-group:focus-within {
             border-color: var(--accent-color);
-            box-shadow: 0 4px 15px rgba(191, 163, 138, 0.08);
+            box-shadow: 0 4px 15px rgba(154, 123, 82, 0.1);
         }
 
         .input-wrapper {
@@ -209,7 +228,7 @@
             background: none;
             border: none;
             padding: 16px 0;
-            font-family: 'Montserrat', sans-serif;
+            font-family: var(--sr-sans);
             color: var(--text-color);
             font-size: 16px;
             font-weight: 300;
@@ -218,8 +237,9 @@
         }
 
         input[type="text"]::placeholder {
-            color: #aba49c;
+            color: var(--muted-text);
             font-size: 0.9rem;
+            font-style: italic;
         }
 
         .icon-action-btn {
@@ -261,10 +281,10 @@
             background: none;
             border: none;
             color: var(--muted-text);
-            font-family: 'Montserrat', sans-serif;
+            font-family: var(--sr-sans);
             font-size: 0.65rem;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
             cursor: pointer;
             transition: color 0.3s ease;
             padding: 4px 12px;
@@ -277,7 +297,7 @@
         .concierge-action-block {
             margin-top: 14px;
             padding-top: 14px;
-            border-top: 1px solid #f7f4f0;
+            border-top: 1px solid var(--input-border);
             display: flex;
             flex-direction: column;
             gap: 10px;
@@ -288,14 +308,18 @@
             background: var(--button-bg);
             color: var(--button-text);
             padding: 14px 18px;
-            border-radius: 10px;
+            border-radius: 2px;
             text-decoration: none;
-            font-size: 0.75rem;
-            font-weight: 400;
-            letter-spacing: 1.5px;
+            font-size: 0.7rem;
+            font-weight: 500;
+            letter-spacing: 0.2em;
             text-transform: uppercase;
             text-align: center;
-            transition: background 0.3s ease;
+            transition: background 0.3s ease, letter-spacing 0.3s ease;
+        }
+
+        .concierge-luxury-btn:hover {
+            letter-spacing: 0.26em;
         }
 
         .concierge-luxury-btn:active {
@@ -304,7 +328,31 @@
 
         @media (max-width: 480px) {
             main { padding-top: 20px; }
-            .section-title { margin-bottom: 12px; font-size: 1.1rem; }
+            .section-title { margin-bottom: 12px; font-size: 1.3rem; }
+        }
+
+        /* Standalone / desktop viewing: this page is normally embedded in a
+           fixed ~400px widget frame, so it rarely needs its own desktop
+           layout — but opened directly in a full browser tab it should
+           read as a considered window, not a mobile page stretched thin. */
+        @media (min-width: 700px) and (min-height: 640px) {
+            html, body { position: static; overflow: auto; }
+            body {
+                min-height: 100%;
+                background: var(--bg-desktop-surround);
+                align-items: center;
+                justify-content: center;
+                padding: 6vh 20px;
+            }
+            main {
+                height: 82vh;
+                max-height: 760px;
+                background: var(--bg-color);
+                border: 1px solid var(--input-border);
+                border-radius: 18px;
+                box-shadow: 0 30px 90px rgba(26, 25, 24, 0.14);
+                padding: 44px 32px 24px;
+            }
         }
     </style>
 </head>
@@ -312,11 +360,12 @@
 
     <main>
         <section class="cinematic-fade" id="chat-section">
+            <span class="sr-kicker">Private Concierge</span>
             <h2 class="section-title">
-                Curator Ambiance Space
-                <span class="section-subtitle">Bespoke Assistance Space</span>
+                The Curator
+                <span class="section-subtitle">Bespoke assistance, one exchange at a time</span>
             </h2>
-            
+
             <div class="chat-space" id="chatSpace"></div>
 
             <div class="input-group">
@@ -341,13 +390,73 @@
     <script>
         const PIPEDREAM_WORKFLOW_URL = "https://sr-support.sagradyanfelix.workers.dev/";
         const STORAGE_KEY = "sr_curator_chat_history";
-        
-        const BRAND_LINKS = {
-            '[TRANSFER_TO_CONCIERGE]': {
-                text: 'Contact Personal Concierge',
-                url: 'https://mail.google.com/mail/?view=cm&fs=1&to=concierge@springrenaissance.store'
-            }
+        const SITE_ORIGIN = "https://springrenaissance.store";
+        const CLUB_PORTAL_URL = "https://club.springrenaissance.store";
+        const CONCIERGE_EMAIL = "concierge@springrenaissance.store";
+
+        // Human-readable labels for the handles the concierge prompt is
+        // allowed to tag — kept as an explicit map (rather than only the
+        // auto-humanized fallback below) so accents and proper casing
+        // survive for the known catalogue. Anything tagged that isn't in
+        // here still gets a reasonable label from humanizeHandle().
+        const PRODUCT_LABELS = {
+            'vendange-no-02': 'Vendange No. 02',
+            'the-atelier-vignette-nocturne-01': 'The Atelier Vignette',
+            'the-kouros-fragment': 'The Kouros Fragment',
+            'the-suspended-contour': 'The Suspended Contour',
+            'flacon-botanique': 'Flacon Botanique',
+            'carafe-suspendue': 'Carafe Suspendue',
+            'bougie-vasque': 'Bougie Vasque',
+            'baume-solide': 'Baume Solide',
+            'pierre-blanche': 'Pierre Blanche'
         };
+        const COLLECTION_LABELS = {
+            'decadent-heritage': 'Decadent Heritage',
+            'the-nocturne-collection': 'The Nocturne Collection',
+            'classical-anatomy': 'Classical Anatomy',
+            'harmonic-contour': 'Harmonic Contour',
+            'jardin-ferme': 'Jardin Fermé'
+        };
+
+        function humanizeHandle(handle) {
+            return handle.replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase());
+        }
+
+        function gmailComposeLink(subject) {
+            return 'https://mail.google.com/mail/?view=cm&fs=1&to=' + CONCIERGE_EMAIL +
+                (subject ? '&su=' + encodeURIComponent(subject) : '');
+        }
+
+        // Every tag the concierge prompt can emit, and how to turn one into
+        // a button. TRANSFER_TO_CONCIERGE has no parameter; the rest carry
+        // a Shopify handle after a colon, e.g. [VIEW_PRODUCT:pierre-blanche].
+        const TAG_HANDLERS = {
+            TRANSFER_TO_CONCIERGE: () => ({
+                text: 'Contact Personal Concierge',
+                url: gmailComposeLink()
+            }),
+            VIEW_MEMBERSHIP: () => ({
+                text: 'Enter The Renaissance Circle',
+                url: SITE_ORIGIN + '/products/patron-membership'
+            }),
+            VIEW_PORTAL: () => ({
+                text: 'Open the Private Client Portal',
+                url: CLUB_PORTAL_URL
+            }),
+            VIEW_COLLECTION: (handle) => ({
+                text: 'View the Collection',
+                url: SITE_ORIGIN + '/collections/' + handle
+            }),
+            VIEW_PRODUCT: (handle) => ({
+                text: 'View the Object',
+                url: SITE_ORIGIN + '/products/' + handle
+            }),
+            REGISTER_INTEREST: (handle) => ({
+                text: 'Register Private Interest',
+                url: gmailComposeLink('Private Registry — ' + (PRODUCT_LABELS[handle] || humanizeHandle(handle)))
+            })
+        };
+        const TAG_PATTERN = /\[(TRANSFER_TO_CONCIERGE|VIEW_MEMBERSHIP|VIEW_PORTAL|VIEW_COLLECTION|VIEW_PRODUCT|REGISTER_INTEREST)(?::([a-z0-9-]+))?\]/g;
 
         let chatContext = [];
 
@@ -360,7 +469,7 @@
             document.querySelectorAll('.cinematic-fade').forEach((el, index) => {
                 setTimeout(() => { el.classList.add('is-visible'); }, index * 120 + 100);
             });
-            
+
             const savedSession = localStorage.getItem(STORAGE_KEY);
             if (savedSession) {
                 try {
@@ -397,7 +506,7 @@
         });
 
         function triggerCuratorGreeting() {
-            const greeting = "Welcome to the Spring Renaissance curatorial space. I am your personal assistant in aesthetics and interior solutions. Here you can learn more about the concept of the debut release of Le Vase Livre, specify the parameters of the objects, or ask any questions about the brand's philosophy.";
+            const greeting = "Welcome to the Spring Renaissance curatorial space. I am your personal assistant on The Renaissance Circle, the Maison's private membership, and on Jardin Fermé, our first collection open to direct order. Ask about either, or about the philosophy behind the Maison.";
             renderBotMessageWithTags(greeting);
             chatContext.push({ role: "model", text: greeting });
             saveSession();
@@ -415,7 +524,7 @@
             displayMessage(textContent, "user");
             chatContext.push({ role: "user", text: textContent });
             saveSession();
-            
+
             chatInputField.value = '';
             transmitDataToBackend(textContent);
         }
@@ -435,40 +544,48 @@
 
             wrapper.appendChild(card);
             chatSpace.appendChild(wrapper);
-            
+
             setTimeout(() => {
                 chatSpace.scrollTop = chatSpace.scrollHeight;
             }, 50);
-            
+
             return card;
         }
 
         function renderBotMessageWithTags(rawText) {
             let displayText = rawText;
-            let activeButtons = [];
+            const activeButtons = [];
+            const seen = new Set();
 
-            Object.keys(BRAND_LINKS).forEach(tag => {
-                if (displayText.includes(tag)) {
-                    displayText = displayText.replace(tag, '').trim();
-                    activeButtons.push(BRAND_LINKS[tag]);
-                }
-            });
+            let match;
+            TAG_PATTERN.lastIndex = 0;
+            while ((match = TAG_PATTERN.exec(rawText)) !== null) {
+                const [fullTag, tagName, handle] = match;
+                const handler = TAG_HANDLERS[tagName];
+                if (!handler) continue;
+                const key = tagName + ':' + (handle || '');
+                if (seen.has(key)) continue; // a tag repeated in one reply only gets one button
+                seen.add(key);
+                activeButtons.push(handler(handle));
+            }
+            displayText = displayText.replace(TAG_PATTERN, '').trim();
 
             const outputCardElement = displayMessage(displayText, "bot");
 
             if (activeButtons.length > 0) {
                 const actionBlock = document.createElement('div');
                 actionBlock.className = 'concierge-action-block';
-                
+
                 activeButtons.forEach(btnConfig => {
                     const linkButton = document.createElement('a');
                     linkButton.href = btnConfig.url;
                     linkButton.target = "_blank";
+                    linkButton.rel = "noopener";
                     linkButton.className = 'concierge-luxury-btn';
                     linkButton.innerText = btnConfig.text;
                     actionBlock.appendChild(linkButton);
                 });
-                
+
                 outputCardElement.appendChild(actionBlock);
                 chatSpace.scrollTop = chatSpace.scrollHeight;
             }
@@ -534,7 +651,7 @@
                 console.error("Transmission breakdown:", err);
                 if (typingWrapper.parentNode) typingWrapper.remove();
                 displayMessage("We apologize for the inconvenience, there were temporary difficulties in communicating with the server. Please try again later.", "bot");
-                chatContext.pop(); 
+                chatContext.pop();
                 saveSession();
             }
         }
